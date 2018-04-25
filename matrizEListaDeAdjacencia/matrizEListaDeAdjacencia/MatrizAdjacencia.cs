@@ -60,16 +60,53 @@ namespace matrizEListaDeAdjacencia
 
         public void ShowLA()
         {
+            Console.WriteLine("Exibindo Lista de Adjacencia");
             for (int i = 0; i < MA.GetLength(0); i++) // Percorre Linhas
             {
                 Console.Write(i + ": ");
-                for(int j =0; j < MA.GetLength(1); j++) // Percorre colunas
+                for (int j = 0; j < MA.GetLength(1); j++) // Percorre colunas
                 {
-                    if (VerificaExistenciaAresta(i, j)) // Se houver aresta entre [i,j] então escrever j
-                        Console.Write(" " + j + " ");
+                    if (VerificaExistenciaAresta(i, j))
+                    {// Se houver aresta entre [i,j] então escrever j
+                        Console.Write(" " + j);
+                        if (j < (MA.GetLength(1) - 1))
+                            Console.Write(", ");
+                    }
                 }
                 Console.Write("\n");
             }
+        }
+
+        public void ShowMA()
+        {
+            Console.WriteLine("Exibindo Matriz de Adjacencia");
+            for (int i = 0; i < MA.GetLength(0); i++) // Percorre Linhas
+            {
+                Console.Write(i + ": ");
+                for (int j = 0; j < MA.GetLength(1); j++) // Percorre colunas
+                {
+                    if (VerificaExistenciaAresta(i, j)) // Se houver aresta entre [i,j] então escrever 1
+                        Console.Write("1 ");
+                    else // Senão escrever 0
+                        Console.Write("0 ");
+                }
+                Console.Write("\n");
+            }
+        }
+
+        public bool Isolado(int v)
+        {
+            if (VerificaExistenciaVertice(v))
+            {
+                for (int i = 0; i < MA.GetLength(1); i++)
+                {
+                    if (MA[v, i] == 1)
+                        return false;
+                }
+                return true;
+            }
+            else
+                throw new ArgumentException();
         }
     }
 }
