@@ -94,19 +94,80 @@ namespace matrizEListaDeAdjacencia
             }
         }
 
-        public bool Isolado(int v)
+        public int Ordem()
         {
-            if (VerificaExistenciaVertice(v))
+            return (this.qtVertices);
+        }
+
+        public bool InserirAresta(int v1, int v2)
+        {
+            if (VerificaExistenciaVertice(v1) && VerificaExistenciaVertice(v2))
             {
-                for (int i = 0; i < MA.GetLength(1); i++)
-                {
-                    if (MA[v, i] == 1)
-                        return false;
-                }
-                return true;
+                MA[v1, v2] = 1;
+                return (true);
             }
             else
-                throw new ArgumentException();
+            {
+                return (false);
+            }
+
         }
+
+        public bool RemoverAresta(int v1, int v2)
+        {
+            if (VerificaExistenciaVertice(v1) && VerificaExistenciaVertice(v2) && MA[v1, v2] == 1)
+            {
+                MA[v1, v2] = 0;
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
+        public int Grau(int vertice)
+        {
+            int grau = 0;
+
+            for (int i = 0; i < MA.GetLength(1); i++)
+            {
+                if (MA[vertice, i] == 1)
+                {
+                    grau++;
+                }
+            }
+            return (grau);
+
+        }
+
+        public bool Impar(int vertice)
+        {
+            if (VerificaExistenciaVertice(vertice) && Grau(vertice) % 2 != 0)
+            {
+                return (true);
+            }
+            return (false);
+        }
+
+        public bool Par(int vertice)
+        {
+            if (VerificaExistenciaVertice(vertice) && Grau(vertice) % 2 == 0)
+            {
+                return (true);
+            }
+            return (false);
+        }
+
+        public bool Isolado(int vertice)
+        {
+            if (VerificaExistenciaVertice(vertice) && Grau(vertice) == 0)
+            {
+                return (true);
+            }
+            return (false);
+        }
+
+
     }
 }
