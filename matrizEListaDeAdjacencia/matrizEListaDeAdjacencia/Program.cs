@@ -30,41 +30,221 @@ namespace matrizEListaDeAdjacencia
             */
 
             // MATRIZ DE ADJACÊNCIA
-            int opcaoMA;
-            int quantidadeVertices;
-            Console.ForegroundColor = ConsoleColor.Red;
+            
+            int opcaoMA = 0;
+            int quantidadeVerticesMA;
+            int v1MA, v2MA;
+
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Matriz de Adjacência \n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Primeiramente, informe a quantidade de vértices do grafo: ");
-            quantidadeVertices = int.Parse(Console.ReadLine());
+            quantidadeVerticesMA = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("\n                             - Escolha uma opção -\n");
-            Console.Write("1- Visualizar a ordem do grafo\n");
-            Console.Write("2- Inserir aresta entre vértices do grafo\n");
-            Console.Write("3- Remover aresta entre vértices do grafo\n");
-            Console.Write("4- Visualizar o grau de um vértice do grafo\n");
-            Console.Write("5- Verificar se o grafo é completo\n");
-            Console.Write("6- Verificar se o grafo é regular\n");
-            Console.Write("7- Mostrar a Matriz de Adjacência do grafo\n");
-            Console.Write("8- Mostrar a Lista de Adjacência do grafo\n");
-            Console.Write("9- Visualizar a sequência de graus do grafo\n");
-            Console.Write("10- Visualizar os vértices adjacentes a um vértice específico\n");
-            Console.Write("11- Verificar se um vértice é isolado\n");
-            Console.Write("12- Verificar se um vértice é ímpar\n");
-            Console.Write("13- Verificar se um vértice é par\n");
-            Console.Write("14- Verificar se dois vértices são adjacentes\n");
-            Console.Write("\nDigite o número da opção escolhida: ");
-            opcaoMA = int.Parse(Console.ReadLine());
-            Console.ReadKey();
-            Console.Clear();
-            //switch(opcao)
-            //{
-            // case 1:
-            //      break;
-            //}
+            MatrizAdjacencia ma = new MatrizAdjacencia(quantidadeVerticesMA);
 
+            do
+            {
+                Console.Clear(); Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("                             - Escolha uma opção -\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("1) Visualizar a ordem do grafo\n");
+                Console.Write("2) Inserir aresta entre vértices do grafo\n");
+                Console.Write("3) Remover aresta entre vértices do grafo\n");
+                Console.Write("4) Visualizar o grau de um vértice do grafo\n");
+                Console.Write("5) Verificar se o grafo é completo\n");
+                Console.Write("6) Verificar se o grafo é regular\n");
+                Console.Write("7) Mostrar a Matriz de Adjacência do grafo\n");
+                Console.Write("8) Mostrar a Lista de Adjacência do grafo\n");
+                Console.Write("9) Visualizar a sequência de graus do grafo\n");
+                Console.Write("10) Visualizar os vértices adjacentes a um vértice específico\n");
+                Console.Write("11) Verificar se um vértice é isolado\n");
+                Console.Write("12) Verificar se um vértice é ímpar\n");
+                Console.Write("13) Verificar se um vértice é par\n");
+                Console.Write("14) Verificar se dois vértices são adjacentes\n");
+                Console.Write("\n0) Sair do Menu\n");
+                Console.Write("\nDigite o número da opção escolhida: ");
+                opcaoMA = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                // Menu de opções da Matriz de Adjacência
+                switch (opcaoMA)
+                {
+                    case 0: // Sair do Menu
+                        Environment.Exit(0);
+                        break;
+                    case 1: // Ordem ***
+                        Console.Write("1) Ver a ordem do grafo");
+                        Console.Write("\nA ordem do grafo = " + ma.Ordem());
+                        Console.Read();
+                        break;
+                    case 2: // Inserir Aresta
+                        Console.Write("2) Inserir Aresta entre vértices\n");
+                        Console.Write("\nInforme o número do primeiro vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+                        Console.Write("\nInforme o número do segundo vértice: ");
+                        v2MA = int.Parse(Console.ReadLine());
+
+                        ma.InserirAresta(v1MA, v2MA);
+                        break;
+                    case 3: // Remover Aresta
+                        Console.Write("3) Remover Aresta entre vértices\n");
+                        Console.Write("\nInforme o número do primeiro vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+                        Console.Write("\nInforme o número do segundo vértice: ");
+                        v2MA = int.Parse(Console.ReadLine());
+
+                        ma.RemoverAresta(v1MA, v2MA);
+                        break;
+                    case 4: // Ver o grau do vértice
+                        Console.Write("4) Ver o grau de um vértice\n");
+                        Console.Write("\nInforme o número do vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+
+                        ma.Grau(v1MA);
+                        Console.Write("\nO grau do vértice " + v1MA + " = " + ma.Grau(v1MA));
+                        Console.Read();
+                        break;
+                    case 5: // Ver se o grafo é completo ***
+                        Console.Write("5) Verificar se o grafo é completo\n");
+                        if(ma.Completo() == true)
+                        {
+                            Console.Write("\nO grafo É completo!");
+                        }
+                        else if (ma.Completo() == false)
+                            Console.Write("\nO grafo NÃO é completo!");
+                        Console.Read();
+                        break;
+                    case 6: // Ver se o grafo é regular
+                        Console.Write("6) Verificar se o grafo é regular\n");
+                        if (ma.Regular() == true)
+                        {
+                            Console.Write("\nO grafo É regular!");
+                        }
+                        else if (ma.Regular() == false)
+                            Console.Write("\nO grafo NÃO é regular!");
+                        Console.Read();
+                        break;
+                    case 7: // Mostrar MA
+                        Console.Write("7) Impressão da Matriz de Adjacência do grafo\n\n");
+                        ma.ShowMA();
+                        Console.Read();
+                        break;
+                    case 8: // Mostrar LA
+                        Console.Write("8) Impressão da Lista de Adjacência do grafo\n\n");
+                        ma.ShowLA();
+                        Console.Read();
+                        break;
+                    case 9: // Ver sequencia de graus do grafo ***
+                        Console.Write("9) Impressão de graus dos vértices do grafo\n\n");
+                        Console.Write("Sequência de graus: "); ma.SequenciaGraus();
+                        Console.Read();
+                        break;
+                    case 10: // Ver os vertices adjacentes a um vertice especifico
+                        Console.Write("10) Impressão dos vértices adjacentes a um vértice específico\n");
+                        Console.Write("Informe o vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+                        ma.VerticesAdjacentes(v1MA);
+                        Console.Read();
+                        break;
+                    case 11: // Verificar se um vertice é isolado 
+                        Console.Write("11) Verificar se um vértice é isolado\n");
+                        Console.Write("Informe o número do vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+
+                        if (ma.Isolado(v1MA) == true)
+                        {
+                            Console.Write("\nO vértice " + v1MA + " É isolado!");
+                        }
+                        else if (ma.Isolado(v1MA) == false)
+                            Console.Write("\nO vértice " + v1MA + " NÃO é isolado!");
+                        Console.Read();
+                        break;
+                    case 12: // Verificar se um vertice é ímpar
+                        Console.Write("12) Verificar se um vértice é ímpar\n");
+                        Console.Write("Informe o número do vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+
+                        if (ma.Impar(v1MA) == true)
+                        {
+                            Console.Write("\nO vértice " + v1MA + " É ímpar!");
+                        }
+                        else if (ma.Impar(v1MA) == false)
+                            Console.Write("\nO vértice " + v1MA + " NÃO é ímpar!");
+                        Console.Read();
+                        break;
+                    case 13: // Verificar se um vertice é par
+                        Console.Write("13) Verificar se um vértice é par\n");
+                        Console.Write("Informe o número do vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+
+                        if (ma.Par(v1MA) == true)
+                        {
+                            Console.Write("\nO vértice " + v1MA + " É par!");
+                        }
+                        else if (ma.Par(v1MA) == false)
+                            Console.Write("\nO vértice " + v1MA + " NÃO é par!");
+                        Console.Read();
+                        break;
+                    case 14: // Verificar se dois vertices são adjacentes
+                        Console.Write("14) Verificar se dois vértices são adjacentes\n");
+                        Console.Write("\nInforme o número do primeiro vértice: ");
+                        v1MA = int.Parse(Console.ReadLine());
+                        Console.Write("\nInforme o número do segundo vértice: ");
+                        v2MA = int.Parse(Console.ReadLine());
+                        if (ma.Adjacentes(v1MA, v2MA) == true)
+                        {
+                            Console.Write("\nOs vértices " + v1MA + " e " + v2MA + " SÃO adjacentes!");
+                        }
+                        else
+                            Console.Write("\nOs vértices " + v1MA + " e " + v2MA + " NÃO são adjacentes!");
+                        break;
+                }
+            }
+            while (opcaoMA > 0 || opcaoMA <= 14);
+
+            
             // LISTA DE ADJACÊNCIA
+            int opcaoLA;
 
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("Matriz de Adjacência \n");
+            Console.ForegroundColor = ConsoleColor.White;
+            do
+            {
+                Console.Clear(); Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("                             - Escolha uma opção -\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("1) Visualizar a ordem do grafo\n");
+                Console.Write("2) Inserir aresta entre vértices do grafo\n");
+                Console.Write("3) Remover aresta entre vértices do grafo\n");
+                Console.Write("4) Visualizar o grau de um vértice do grafo\n");
+                Console.Write("5) Verificar se o grafo é completo\n");
+                Console.Write("6) Verificar se o grafo é regular\n");
+                Console.Write("7) Mostrar a Matriz de Adjacência do grafo\n");
+                Console.Write("8) Mostrar a Lista de Adjacência do grafo\n");
+                Console.Write("9) Visualizar a sequência de graus do grafo\n");
+                Console.Write("10) Visualizar os vértices adjacentes a um vértice específico\n");
+                Console.Write("11) Verificar se um vértice é isolado\n");
+                Console.Write("12) Verificar se um vértice é ímpar\n");
+                Console.Write("13) Verificar se um vértice é par\n");
+                Console.Write("14) Verificar se dois vértices são adjacentes\n");
+                Console.Write("\n0) Sair do Menu\n");
+                Console.Write("\nDigite o número da opção escolhida: ");
+                opcaoLA = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                // Menu de opções da Matriz de Adjacência
+                switch (opcaoLA)
+                {
+                    case 1:
+                        Console.Write("1) A ordem do grafo = " + quantidadeVerticesMA);
+                        Console.Read();
+                        break;
+                }
+
+            }
+            while (opcaoLA > 0 || opcaoLA <= 14);
         }
     }
 }
