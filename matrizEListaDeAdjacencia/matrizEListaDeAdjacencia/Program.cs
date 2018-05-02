@@ -247,7 +247,7 @@ namespace matrizEListaDeAdjacencia
                                 case 1: // Ordem ***
                                     Console.Write("1) Ver a ordem do grafo\n");
                                     Console.Write("\nA ordem do grafo = " + la.Ordem());
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 2: // Inserir Vértice
                                     Console.Write("2) Inserir Vértice no grafo\n");
@@ -288,7 +288,7 @@ namespace matrizEListaDeAdjacencia
 
                                     la.Grau(v1LA);
                                     Console.Write("\nO grau do vértice " + v1LA + " = " + la.Grau(v1LA));
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 7: // Ver se o grafo é completo ***
                                     Console.Write("7) Verificar se o grafo é completo\n");
@@ -298,7 +298,7 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else if (la.Completo() == false)
                                         Console.Write("\nO grafo NÃO é completo!");
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 8: // Ver se o grafo é regular
                                     Console.Write("8) Verificar se o grafo é regular\n");
@@ -308,24 +308,24 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else if (la.Regular() == false)
                                         Console.Write("\nO grafo NÃO é regular!");
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 9: // Mostrar LA
                                     Console.Write("9) Impressão da Lista de Adjacência do grafo\n\n");
                                     la.ShowLA();
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 10: // Ver sequencia de graus do grafo ***
                                     Console.Write("10) Impressão de graus dos vértices do grafo\n\n");
                                     Console.Write("Sequência de graus: "); la.SequenciaGraus();
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 11: // Ver os vertices adjacentes a um vertice especifico
                                     Console.Write("11) Impressão dos vértices adjacentes a um vértice específico\n");
                                     Console.Write("Informe o vértice: ");
                                     v1LA = int.Parse(Console.ReadLine());
                                     la.VerticesAdjacentes(v1LA);
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 12: // Verificar se um vertice é isolado 
                                     Console.Write("12) Verificar se um vértice é isolado\n");
@@ -338,7 +338,7 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else if (la.Isolado(v1LA) == false)
                                         Console.Write("\nO vértice " + v1LA + " NÃO é isolado!");
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 13: // Verificar se um vertice é ímpar
                                     Console.Write("13) Verificar se um vértice é ímpar\n");
@@ -351,7 +351,7 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else if (la.Impar(v1LA) == false)
                                         Console.Write("\nO vértice " + v1LA + " NÃO é ímpar!");
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 14: // Verificar se um vertice é par
                                     Console.Write("14) Verificar se um vértice é par\n");
@@ -364,7 +364,7 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else if (la.Par(v1LA) == false)
                                         Console.Write("\nO vértice " + v1LA + " NÃO é par!");
-                                    Console.Read();
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                                 case 15: // Verificar se dois vertices são adjacentes
                                     Console.Write("15) Verificar se dois vértices são adjacentes\n");
