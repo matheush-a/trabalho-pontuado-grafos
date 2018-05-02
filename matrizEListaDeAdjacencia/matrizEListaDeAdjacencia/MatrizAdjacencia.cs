@@ -42,6 +42,7 @@ namespace matrizEListaDeAdjacencia
             if (VerificaExistenciaVertice(v1) && VerificaExistenciaVertice(v2) && MA[v1, v2] == 1)
             {
                 MA[v1, v2] = 0;
+                MA[v2, v1] = 0;
                 return (true);
             }
             else
@@ -78,11 +79,11 @@ namespace matrizEListaDeAdjacencia
             return true;
         }
 
-        public bool Regular()
+        public bool Regular() // *** CONFERIR O ERRO
         {
             int numArest;
             numArest = Grau(0);
-            for (int i = 1; i < MA.GetLength(0); i++)
+            for (int i = 0; i < MA.GetLength(0); i++)
             {
                 if (MA[i, i] != numArest)
                     return false;
