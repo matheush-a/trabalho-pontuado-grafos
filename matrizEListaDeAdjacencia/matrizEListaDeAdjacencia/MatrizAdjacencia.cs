@@ -14,6 +14,7 @@ namespace matrizEListaDeAdjacencia
         public MatrizAdjacencia(int qtdVertices)
         {
             MA = new int[qtdVertices, qtdVertices]; // Cria matriz quadrada, com o número passado
+            this.qtVertices = qtdVertices;
         }
 
         public int Ordem()
@@ -26,6 +27,7 @@ namespace matrizEListaDeAdjacencia
             if (VerificaExistenciaVertice(v1) && VerificaExistenciaVertice(v2))
             {
                 MA[v1, v2] = 1;
+                MA[v2, v1] = 1;
                 return (true);
             }
             else

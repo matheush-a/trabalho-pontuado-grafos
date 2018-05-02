@@ -26,9 +26,7 @@ namespace matrizEListaDeAdjacencia
         public bool InserirVertice(int vertice)
         {
             if (LA.Contains(vertice))
-            {
                 return false;
-            }
             verticesLA += vertice + ",";
             LA.Add(vertice);
             return true;
@@ -75,13 +73,8 @@ namespace matrizEListaDeAdjacencia
                 string[] valoresV1 = valorV1.Split(',');
                 valorV1 = "";
                 for (int i = 0; i < (valoresV1.Length - 1); i++)
-                {
                     if (valoresV1[i] != (v2 + ""))
-                    {
                         valorV1 += valoresV1[i] + ",";
-                    }
-
-                }
                 LA.RemoveAt(v1);
                 LA.Add(v1);
                 LA.Insert(v1, valorV1);
@@ -90,13 +83,8 @@ namespace matrizEListaDeAdjacencia
                 string[] valoresV2 = valorV2.Split(',');
                 valorV2 = "";
                 for (int i = 0; i < (valoresV2.Length - 1); i++)
-                {
                     if (valoresV2[i] != (v1 + ""))
-                    {
                         valorV2 += valoresV2[i] + ",";
-                    }
-
-                }
                 LA.RemoveAt(v2);
                 LA.Add(v2);
                 LA.Insert(v2, valorV2);
@@ -118,19 +106,15 @@ namespace matrizEListaDeAdjacencia
             string[] adjacentesV;
             string[] vertices = this.verticesLA.Split(',');
             ArrayList adjacentesA = new ArrayList();
-            for(int i = 0; i < (vertices.Length - 1); i++)
+            for (int i = 0; i < (vertices.Length - 1); i++)
             {
                 adjacentes = LA[i].ToString();
                 adjacentesV = adjacentes.Split(',');
-                for(int j = 0; j < adjacentesV.Length - 1; j++)
-                {
+                for (int j = 0; j < adjacentesV.Length - 1; j++)
                     adjacentesA.Add(adjacentesV[j]);
-                }
-                foreach(string s in vertices)
-                {
+                foreach (string s in vertices)
                     if (!adjacentesA.Contains(s))
                         return false;
-                }
             }
             return true;
         }
@@ -142,7 +126,7 @@ namespace matrizEListaDeAdjacencia
             string[] adjacentesV = adjacentes.Split(',');
             string[] adjacentesVAux;
             int numArest = adjacentesV.Length;
-            for(int i = 1; i < LA.Count; i++)
+            for (int i = 1; i < LA.Count; i++)
             {
                 adjacentesAux = LA[i].ToString();
                 adjacentesVAux = adjacentesAux.Split(',');
@@ -217,10 +201,8 @@ namespace matrizEListaDeAdjacencia
             string valorV1 = LA[v1].ToString();
             string[] valoresV1 = valorV1.Split(',');
             for (int i = 0; i < valoresV1.Length - 1; i++)
-            {
                 if (valoresV1[i] == (v2 + ""))
                     return true;
-            }
             return false;
         }
     }
