@@ -378,6 +378,7 @@ namespace matrizEListaDeAdjacencia
                                     }
                                     else
                                         Console.Write("\nOs vértices " + v1LA + " e " + v2LA + " NÃO são adjacentes!");
+                                    System.Threading.Thread.Sleep(3000);
                                     break;
                             }
 

@@ -16,7 +16,7 @@ namespace matrizEListaDeAdjacencia
 
         public ListaAdjacencia()
         {
-            LA = new string[20, 2];
+            LA = new string[50, 2];
             for (int i = 0; i < LA.GetLength(0); i++)
             {
                 LA[i, 0] = "";
@@ -26,7 +26,7 @@ namespace matrizEListaDeAdjacencia
 
         public int Ordem()
         {
-            for (int i = 0; i < LA.Length; i++)
+            for (int i = 0; i < LA.GetLength(0); i++)
                 if (LA[0, i] == "")
                     return i;
             return 0;
@@ -34,10 +34,12 @@ namespace matrizEListaDeAdjacencia
 
         public bool InserirVertice(int vertice)
         {
-            if (VerificaExistenciaVertice(vertice))
+            if (!VerificaExistenciaVertice(vertice))
             {
-                LA[contPos, 0] = vertice+"";
-                contPos--;
+                LA[contPos, 0] = vertice.ToString();
+                Console.WriteLine(LA[contPos, 0]);
+                contPos++;
+                verticesLA += vertice + ",";
                 return true;
             }
             return false;
@@ -47,14 +49,25 @@ namespace matrizEListaDeAdjacencia
         {
             if (VerificaExistenciaVertice(vertice))
             {
+                int pos = 0;
+                string[] aux = verticesLA.Split(',');
+                verticesLA = "";
+                for(int i = 0; i < aux.Length; i ++)
+                {
+                    if(aux[i] != vertice + "")
+                    {
+                        verticesLA = aux[i] + ",";
+                    }
+                }
                 string arestVert = "";
                 string[] adjaVert;
-                int pos = getPosVertice(vertice);
+                pos = getPosVertice(vertice);
                 for(int i = pos; i < contPos; i++)
                 {
                     LA[pos, 0] = LA[(pos + 1), 0];
                     LA[pos, 1] = LA[(pos + 1), 1];
                 }
+                contPos--;
                 for(int i = 0; i < LA.GetLength(0); i++)
                 {
                     arestVert = LA[i, 1];
@@ -80,7 +93,7 @@ namespace matrizEListaDeAdjacencia
         {
             if (VerificaExistenciaVertice(v1) && VerificaExistenciaVertice(v2))
             {
-                if (!VerificaExistenciaAresta(v1, v2) || !VerificaExistenciaAresta(v2, v1))
+                if (VerificaExistenciaAresta(v1, v2) || VerificaExistenciaAresta(v2, v1))
                     return false;
                 int pos = getPosVertice(v1);
                 string valorV1 = LA[pos,1];
@@ -133,21 +146,17 @@ namespace matrizEListaDeAdjacencia
 
         public bool Completo()
         {
-            string adjacentes = "";
-            string[] adjacentesV;
             string[] vertices = this.verticesLA.Split(',');
-            ArrayList adjacentesA = new ArrayList();
-            for (int i = 0; i < (vertices.Length - 1); i++)
+            int aux = vertices.Length;
+            string[] adjacentes;
+            for(int i = 0; i < contPos; i++)
             {
-                adjacentes = LA[i,1];
-                adjacentesV = adjacentes.Split(',');
-                for (int j = 0; j < adjacentesV.Length - 1; j++)
-                    adjacentesA.Add(adjacentesV[j]);
-                foreach (string s in vertices)
-                    if (!adjacentesA.Contains(s))
-                        return false;
+                adjacentes = this.LA[i, 1].Split(',');
+                if (aux != adjacentes.Length)
+                    return false;
             }
             return true;
+            
         }
 
         public bool Regular()
@@ -169,15 +178,28 @@ namespace matrizEListaDeAdjacencia
 
         public void ShowLA()
         {
-            for (int i = 0; i < LA.GetLength(0); i++)
-                Console.WriteLine(i + " : " + LA[i,0]);
+            int aux;
+            int[] vert = new int[contPos];
+            for (int i = 0; i < contPos; i ++)
+            {
+                vert[i] = int.Parse(LA[i, 0]);
+            }
+            Array.Sort(vert);
+            for (int i = 0; i < contPos; i++)
+            {
+                aux = getPosVertice(vert[i]);
+                Console.WriteLine(LA[aux, 0] + " : " + LA[aux, 1]);
+            }
         }
 
         public void SequenciaGraus()
         {
-            int[] sequenciaGraus = new int[LA.GetLength(0)];
-            for (int i = 0; i < LA.GetLength(0); i++)
-                sequenciaGraus[i] = Grau(i);
+            int[] sequenciaGraus = new int[contPos];
+            string[] vertices = verticesLA.Split(',');
+            for (int i = 0; i < vertices.Length - 1; i++)
+            {
+                sequenciaGraus[i] = Grau(int.Parse(vertices[i]));
+            }
 
             Array.Sort(sequenciaGraus);
             foreach (int i in sequenciaGraus)
@@ -225,14 +247,14 @@ namespace matrizEListaDeAdjacencia
         private bool VerificaExistenciaVertice(int vertice)
         {
             for (int i = 0; i < LA.GetLength(0); i++)
-                if (LA[i, 0] == (vertice + ""))
+                if (LA[i, 0] == vertice.ToString())
                     return true;
             return false;
         }
 
         private int getPosVertice(int vertice)
         {
-            for (int i = 0; i < LA.GetLength(0); i++)
+            for (int i = 0; i < contPos; i++)
             {
                 if (LA[i, 0] == (vertice + ""))
                 {
@@ -244,8 +266,8 @@ namespace matrizEListaDeAdjacencia
 
         private bool VerificaExistenciaAresta(int v1, int v2)
         {
-            int posv1 = getPosVertice(v1);
-            string valorV1 = LA[posv1,1];
+            int pos = getPosVertice(v1);
+            string valorV1 = LA[pos,1];
             string[] valoresV1 = valorV1.Split(',');
             for (int i = 0; i < valoresV1.Length - 1; i++)
                 if (valoresV1[i] == (v2 + ""))

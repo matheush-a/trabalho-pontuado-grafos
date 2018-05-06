@@ -83,9 +83,9 @@ namespace matrizEListaDeAdjacencia
         {
             int numArest;
             numArest = Grau(0);
-            for (int i = 0; i < MA.GetLength(0); i++)
+            for (int i = 1; i < MA.GetLength(0); i++)
             {
-                if (MA[i, i] != numArest)
+                if (Grau(i) != numArest)
                     return false;
             }
             return true;
