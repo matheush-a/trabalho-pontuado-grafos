@@ -26,10 +26,8 @@ namespace matrizEListaDeAdjacencia
 
         public int Ordem()
         {
-            for (int i = 0; i < LA.GetLength(0); i++)
-                if (LA[0, i] == "")
-                    return i;
-            return 0;
+            string[] ordem = verticesLA.Split(',');
+            return (ordem.Length - 1);
         }
 
         public bool InserirVertice(int vertice)
@@ -148,11 +146,13 @@ namespace matrizEListaDeAdjacencia
         {
             string[] vertices = this.verticesLA.Split(',');
             int aux = vertices.Length;
+            //Console.WriteLine(aux);
+            //Console.ReadKey();
             string[] adjacentes;
             for(int i = 0; i < contPos; i++)
             {
                 adjacentes = this.LA[i, 1].Split(',');
-                if (aux != adjacentes.Length)
+                if ((aux - 1) != adjacentes.Length)
                     return false;
             }
             return true;
